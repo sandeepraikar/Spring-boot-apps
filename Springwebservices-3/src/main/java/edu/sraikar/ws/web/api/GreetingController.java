@@ -29,6 +29,19 @@ public class GreetingController {
 			greetingMap = new HashMap<BigInteger, Greeting>();
 			nextId = BigInteger.ONE;
 		}
+		
+		//If update...
+		if(greeting.getId()!=null){
+			Greeting oldGreeting = greetingMap.get(greeting.getId());
+			if(oldGreeting==null){
+				return null;
+			}
+			greetingMap.remove(greeting.getId());
+			greetingMap.put(greeting.getId(), greeting);
+			return greeting;
+		}
+		
+		//If create..
 		greeting.setId(nextId);
 		nextId = nextId.add(BigInteger.ONE);
 		greetingMap.put(greeting.getId(), greeting);
@@ -75,5 +88,18 @@ public class GreetingController {
 	public  ResponseEntity<Greeting> createGreeting(@RequestBody Greeting greeting){
 		Greeting savedGreeting = save(greeting);
 		return new ResponseEntity<Greeting>(savedGreeting,HttpStatus.CREATED);
+	}
+	
+	//end point for updating a greeting object
+	@RequestMapping(value="/api/greetings",
+					method=RequestMethod.PUT,
+					produces=MediaType.APPLICATION_JSON_VALUE,
+					consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Greeting> updateGreeting(@RequestBody Greeting greeting){
+		Greeting updatedGreeting = save(greeting);
+		if(updatedGreeting==null){
+			return new ResponseEntity<Greeting>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<Greeting>(updatedGreeting, HttpStatus.OK);
 	}
 }
