@@ -48,6 +48,14 @@ public class GreetingController {
 		return greeting;
 	}
 
+	private static boolean delete(BigInteger id){
+		if(!greetingMap.containsKey(id)){
+			return false;
+		}
+		greetingMap.remove(id);
+		return true;
+	}
+	
 	static {
 		Greeting g1 = new Greeting();
 		g1.setText("Hello Spring Boot");
@@ -101,5 +109,16 @@ public class GreetingController {
 			return new ResponseEntity<Greeting>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<Greeting>(updatedGreeting, HttpStatus.OK);
+	}
+	
+	//end point for deleting greeting resource based on the greeting id passed as path variable!
+	@RequestMapping(value="/api/greetings/{id}",
+					method=RequestMethod.DELETE)
+	public ResponseEntity<Greeting> deleteGreeting(@PathVariable("id") BigInteger id){
+		boolean deleted = delete(id);
+		if(!deleted){
+			return new ResponseEntity<Greeting>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<Greeting>(HttpStatus.NO_CONTENT);
 	}
 }
