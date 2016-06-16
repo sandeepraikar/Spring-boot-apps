@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,5 +65,15 @@ public class GreetingController {
 			return new ResponseEntity<Greeting>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Greeting>(greeting,HttpStatus.OK);
+	}
+	
+	//end point for creating new greeting object and saving it into dummy placeholder map object
+	@RequestMapping(value="/api/greetings",
+					method=RequestMethod.POST,
+					produces=MediaType.APPLICATION_JSON_VALUE,
+					consumes=MediaType.APPLICATION_JSON_VALUE)
+	public  ResponseEntity<Greeting> createGreeting(@RequestBody Greeting greeting){
+		Greeting savedGreeting = save(greeting);
+		return new ResponseEntity<Greeting>(savedGreeting,HttpStatus.CREATED);
 	}
 }
