@@ -1,0 +1,3 @@
+edu\sraikar\Application.class
+edu\sraikar\ws\model\Greeting.class
+edu\sraikar\ws\web\api\GreetingController.class
