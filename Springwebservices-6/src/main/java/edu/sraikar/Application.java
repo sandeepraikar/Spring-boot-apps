@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -24,9 +25,19 @@ public class Application
     }
     
     //This is inbuilt cachemanager and not good for production environments
-    @Bean
+    /*@Bean
     public CacheManager cacheManager(){
     	ConcurrentMapCacheManager cacheManager = new ConcurrentMapCacheManager("greetings"); //accepts an array of strings which signifies the individual named caches
+    	return cacheManager;
+    }*/
+    
+    //for distributed solution (multiple nodes) use elastic cache!
+    
+    //For production environments (provides local cache)
+    //Using Guava cache manager (more robust cache implementation) --> Requires spring context support and guava libraries 
+    @Bean
+    public CacheManager cacheManager(){
+    	GuavaCacheManager cacheManager = new GuavaCacheManager("greetings"); //accepts an array of strings which signifies the individual named caches
     	return cacheManager;
     }
 }
