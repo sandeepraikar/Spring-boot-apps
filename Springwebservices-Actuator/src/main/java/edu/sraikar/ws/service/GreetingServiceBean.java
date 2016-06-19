@@ -3,6 +3,7 @@ package edu.sraikar.ws.service;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -32,8 +33,12 @@ public class GreetingServiceBean implements GreetingService {
 	@Autowired
 	private GreetingRepository greetingRepository;
 
+	@Autowired
+	private CounterService counterService;
+	
 	@Override
 	public Collection<Greeting> findAll() {
+		counterService.increment("method.invoked.greetingServiceBean.findAll");
 		Collection<Greeting> greetings = greetingRepository.findAll();
 		return greetings;
 	}
@@ -43,6 +48,7 @@ public class GreetingServiceBean implements GreetingService {
 													// ,key:indexed by the id
 													// method parameter
 	public Greeting findOne(Long id) {
+		counterService.increment("method.invoked.greetingServiceBean.findOne");
 		Greeting greeting = greetingRepository.findOne(id);
 		return greeting;
 	}
@@ -54,6 +60,7 @@ public class GreetingServiceBean implements GreetingService {
 		if (greeting.getId() != null) {
 			return null;
 		}
+		counterService.increment("method.invoked.greetingServiceBean.create");
 		Greeting savedGreeting = greetingRepository.save(greeting);
 		// This is dummy check to see how transaction works!!!!
 		/*if (savedGreeting.getId() == 4L) {
@@ -66,6 +73,7 @@ public class GreetingServiceBean implements GreetingService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	@CachePut(value="greetings",key="#greeting.id")
 	public Greeting update(Greeting greeting) {
+		counterService.increment("method.invoked.greetingServiceBean.update");
 		Greeting greetingPersisted = greetingRepository.findOne(greeting.getId());
 		if (greetingPersisted.getId() == null) {
 			return null;
@@ -77,6 +85,7 @@ public class GreetingServiceBean implements GreetingService {
 	@Override
 	@CacheEvict(value="greetings", key="#id") //remove cached items
 	public void remove(Long id) {
+		counterService.increment("method.invoked.greetingServiceBean.remove");
 		greetingRepository.delete(id);
 
 	}
