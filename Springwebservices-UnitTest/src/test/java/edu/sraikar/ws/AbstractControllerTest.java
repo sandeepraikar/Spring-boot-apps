@@ -13,6 +13,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import edu.sraikar.ws.web.api.BaseController;
+
 @WebAppConfiguration //This informs spring to create a web application context instead of a standard application context
 public abstract class AbstractControllerTest extends AbstractTest {
 
@@ -25,6 +27,9 @@ public abstract class AbstractControllerTest extends AbstractTest {
 		mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build() ;// This makes the mvc object aware of all application components
 	}
 	
+	protected void setUp(BaseController controller){
+		mvc = MockMvcBuilders.standaloneSetup(controller).build();
+	}
 	protected String mapToJson(Object obj) throws JsonProcessingException{
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(obj);

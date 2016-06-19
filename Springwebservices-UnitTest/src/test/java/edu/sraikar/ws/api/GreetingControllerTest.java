@@ -1,4 +1,4 @@
-package edu.sraikar.ws;
+package edu.sraikar.ws.api;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +8,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.sraikar.ws.AbstractControllerTest;
 import edu.sraikar.ws.model.Greeting;
 import edu.sraikar.ws.service.GreetingService;
 import junit.framework.Assert;

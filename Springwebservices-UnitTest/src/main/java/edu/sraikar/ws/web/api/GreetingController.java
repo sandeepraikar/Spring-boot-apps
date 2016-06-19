@@ -23,7 +23,7 @@ import edu.sraikar.ws.service.GreetingService;
 //The @RestController extends the standard Spring sterotype
 // @Controller
 @RestController
-public class GreetingController {
+public class GreetingController extends BaseController{
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
