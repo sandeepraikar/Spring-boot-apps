@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @author Matt Warman
  */
 @Service
-public class EmailServiceImpl implements EmailService {
+public class EmailServiceBean implements EmailService {
 
     /**
      * The Logger for this class.

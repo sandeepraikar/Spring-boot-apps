@@ -27,7 +27,7 @@ import edu.sraikar.ws.repository.GreetingRepository;
 // already exists and readOnly is set to true to indicate the methods do not
 // modify or create data (applies only to findAll() and findOne())
 
-public class GreetingServiceImpl implements GreetingService {
+public class GreetingServiceBean implements GreetingService {
 
 	@Autowired
 	private GreetingRepository greetingRepository;
