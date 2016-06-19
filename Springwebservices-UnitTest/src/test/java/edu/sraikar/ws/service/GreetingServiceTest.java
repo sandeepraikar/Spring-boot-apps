@@ -72,7 +72,7 @@ public class GreetingServiceTest extends AbstractTest {
 		Assert.assertEquals("failure - expected text attribute match", "test", createdEntity.getText());
 
 		Collection<Greeting> list = greetingService.findAll();
-		Assert.assertEquals("failure - expected size", 3, list.size());
+		Assert.assertEquals("failure - expected size", 4, list.size());
 
 	}
 
@@ -143,7 +143,7 @@ public class GreetingServiceTest extends AbstractTest {
 		greetingService.remove(id);
 
 		Collection<Greeting> list = greetingService.findAll();
-		Assert.assertEquals("failure - expected size", 1, list.size());
+		Assert.assertEquals("failure - expected size", 2, list.size());
 
 		Greeting deletedEntity = greetingService.findOne(id);
 		Assert.assertNull("failure - expected null", deletedEntity);
