@@ -1,0 +1,14 @@
+##
+# List of actuator endpoints used for monitoring
+##
+localhost:8080/autoconfig
+localhost:8080/beans
+localhost:8080/configprops
+localhost:8080/env
+localhost:8080/mappings
+localhost:8080/info
+localhost:8080/health
+localhost:8080/dump
+localhost:8080/metrics
+localhost:8080/trace
+localhost:8080/shutdown

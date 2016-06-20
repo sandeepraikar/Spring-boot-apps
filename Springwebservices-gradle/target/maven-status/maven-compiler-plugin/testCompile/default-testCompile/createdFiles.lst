@@ -1,0 +1,5 @@
+edu\sraikar\ws\AbstractTest.class
+edu\sraikar\ws\AbstractControllerTest.class
+edu\sraikar\ws\api\GreetingControllerTest.class
+edu\sraikar\ws\api\GreetingControllerMocksTest.class
+edu\sraikar\ws\service\GreetingServiceTest.class
