@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BaseController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Springwebservices-gradle</a> &gt; <a href="index.source.html" class="el_package">edu.sraikar.ws.web.api</a> &gt; <span class="el_source">BaseController.java</span></div><h1>BaseController.java</h1><pre class="source lang-java linenums">package edu.sraikar.ws.web.api;
+
+import java.util.Map;
+
+import javax.persistence.NoResultException;
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import edu.sraikar.ws.web.DefaultExceptionAttributes;
+import edu.sraikar.ws.web.ExceptionAttributes;
+
+<span class="fc" id="L17">public class BaseController {</span>
+
+<span class="fc" id="L19">	protected Logger logger = LoggerFactory.getLogger(this.getClass());</span>
+
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; handleException(Exception exception, HttpServletRequest request) {
+
+<span class="nc" id="L24">		logger.error(&quot;&gt;&gt;handle exception&quot;);</span>
+<span class="nc" id="L25">		logger.error(&quot;Exception : &quot; + exception);</span>
+
+<span class="nc" id="L27">		ExceptionAttributes exceptionAttributes = new DefaultExceptionAttributes();</span>
+
+<span class="nc" id="L29">		Map&lt;String, Object&gt; responseBody = exceptionAttributes.getExceptionAttributes(exception, request,</span>
+				HttpStatus.INTERNAL_SERVER_ERROR);
+<span class="nc" id="L31">		logger.error(&quot;&lt;&lt; handle exception&quot;);</span>
+<span class="nc" id="L32">		return new ResponseEntity&lt;Map&lt;String, Object&gt;&gt;(responseBody, HttpStatus.INTERNAL_SERVER_ERROR);</span>
+	}
+
+	@ExceptionHandler(NoResultException.class)
+	public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; handleNoResultException(NoResultException noResultexception, HttpServletRequest request) {
+
+<span class="nc" id="L38">		logger.error(&quot;&gt;&gt;handle NoResult exception&quot;);</span>
+<span class="nc" id="L39">		logger.error(&quot;Exception : &quot; + noResultexception);</span>
+
+<span class="nc" id="L41">		ExceptionAttributes exceptionAttributes = new DefaultExceptionAttributes();</span>
+
+<span class="nc" id="L43">		Map&lt;String, Object&gt; responseBody = exceptionAttributes.getExceptionAttributes(noResultexception, request,</span>
+				HttpStatus.NOT_FOUND);
+<span class="nc" id="L45">		logger.error(&quot;&lt;&lt; handle NoResult exception&quot;);</span>
+<span class="nc" id="L46">		return new ResponseEntity&lt;Map&lt;String, Object&gt;&gt;(responseBody, HttpStatus.NOT_FOUND);</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

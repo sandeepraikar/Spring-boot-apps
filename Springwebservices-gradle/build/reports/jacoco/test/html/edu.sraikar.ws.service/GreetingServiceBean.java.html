@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GreetingServiceBean.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Springwebservices-gradle</a> &gt; <a href="index.source.html" class="el_package">edu.sraikar.ws.service</a> &gt; <span class="el_source">GreetingServiceBean.java</span></div><h1>GreetingServiceBean.java</h1><pre class="source lang-java linenums">package edu.sraikar.ws.service;
+
+import java.util.Collection;
+
+import javax.persistence.EntityExistsException;
+import javax.persistence.NoResultException;
+
+import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.metrics.CounterService;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import edu.sraikar.ws.model.Greeting;
+import edu.sraikar.ws.repository.GreetingRepository;
+
+@Service
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true) // this
+																	// indicates
+																	// the
+																	// service
+// methods exposed in
+// GreetingService interface
+// support existing
+// transaction and will not
+// start any new transaction
+// if any transaction
+// already exists and readOnly is set to true to indicate the methods do not
+// modify or create data (applies only to findAll() and findOne())
+
+<span class="fc" id="L37">public class GreetingServiceBean implements GreetingService {</span>
+
+<span class="fc" id="L39">	private Logger logger = LoggerFactory.getLogger(this.getClass());</span>
+	@Autowired
+	private GreetingRepository greetingRepository;
+
+	@Autowired
+	private CounterService counterService;
+	
+	@Override
+	public Collection&lt;Greeting&gt; findAll() {
+<span class="fc" id="L48">		counterService.increment(&quot;method.invoked.greetingServiceBean.findAll&quot;);</span>
+<span class="fc" id="L49">		Collection&lt;Greeting&gt; greetings = greetingRepository.findAll();</span>
+<span class="fc" id="L50">		return greetings;</span>
+	}
+
+	@Override
+	@Cacheable(value = &quot;greetings&quot;, key = &quot;#id&quot;) // value: name of the cache
+													// ,key:indexed by the id
+													// method parameter
+	public Greeting findOne(Long id) {
+<span class="fc" id="L58">		counterService.increment(&quot;method.invoked.greetingServiceBean.findOne&quot;);</span>
+<span class="fc" id="L59">		Greeting greeting = greetingRepository.findOne(id);</span>
+<span class="fc" id="L60">		return greeting;</span>
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	@CachePut(value = &quot;greetings&quot;, key = &quot;#result.id&quot;)
+	public Greeting create(Greeting greeting) {
+<span class="fc bfc" id="L67" title="All 2 branches covered.">		 if (greeting.getId() != null) {</span>
+	            // Cannot create Greeting with specified ID value
+<span class="fc" id="L69">	            logger.error(</span>
+	                    &quot;Attempted to create a Greeting, but id attribute was not null.&quot;);
+<span class="fc" id="L71">	            throw new EntityExistsException(</span>
+	                    &quot;The id attribute must be null to persist a new entity.&quot;);
+	        }
+<span class="fc" id="L74">		counterService.increment(&quot;method.invoked.greetingServiceBean.create&quot;);</span>
+<span class="fc" id="L75">		Greeting savedGreeting = greetingRepository.save(greeting);</span>
+		// This is dummy check to see how transaction works!!!!
+		/*if (savedGreeting.getId() == 4L) {
+			throw new RuntimeException();
+		}*/
+<span class="fc" id="L80">		return savedGreeting;</span>
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	@CachePut(value=&quot;greetings&quot;,key=&quot;#greeting.id&quot;)
+	public Greeting update(Greeting greeting) {
+<span class="fc" id="L87">		counterService.increment(&quot;method.invoked.greetingServiceBean.update&quot;);</span>
+<span class="fc" id="L88">        Greeting greetingToUpdate = findOne(greeting.getId());</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">        if (greetingToUpdate == null) {</span>
+            // Cannot update Greeting that hasn't been persisted
+<span class="fc" id="L91">            logger.error(</span>
+                    &quot;Attempted to update a Greeting, but the entity does not exist.&quot;);
+<span class="fc" id="L93">            throw new NoResultException(&quot;Requested entity not found.&quot;);</span>
+        }
+
+<span class="fc" id="L96">        greetingToUpdate.setText(greeting.getText());</span>
+<span class="fc" id="L97">        Greeting updatedGreeting = greetingRepository.save(greetingToUpdate);</span>
+
+<span class="fc" id="L99">        logger.info(&quot;&lt; update id:{}&quot;, greeting.getId());</span>
+<span class="fc" id="L100">        return updatedGreeting;</span>
+	}
+
+	@Override
+	@CacheEvict(value=&quot;greetings&quot;, key=&quot;#id&quot;) //remove cached items
+	public void remove(Long id) {
+<span class="fc" id="L106">		counterService.increment(&quot;method.invoked.greetingServiceBean.remove&quot;);</span>
+<span class="fc" id="L107">		greetingRepository.delete(id);</span>
+
+<span class="fc" id="L109">	}</span>
+
+	@Override
+	@CacheEvict(value=&quot;greetings&quot;, allEntries=true) //evicts all cache entries with the value provided
+	public void evictCache() {
+		
+<span class="fc" id="L115">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

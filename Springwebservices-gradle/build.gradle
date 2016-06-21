@@ -13,6 +13,7 @@ apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
 apply plugin: 'project-report'
 apply plugin: 'build-dashboard'
+apply plugin: 'jacoco'
 
 version = '1.0.0-SNAPSHOT'
 sourceCompatibility = 1.8
@@ -21,6 +22,7 @@ ext {
   guavaVersion = '19.0'
   jadiraVersion = '4.0.0.GA'
   swaggerVersion = '2.3.0'
+  jacocoVersion='0.7.7.201606060606'
 }
 
 repositories {
@@ -47,3 +49,17 @@ dependencies {
   
   testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
 }
+
+jacoco{
+ toolVersion= jacocoVersion
+}
+
+jacocoTestReport{
+	reports{
+		html.enabled=true
+		xml.enabled=true
+		csv.enabled=true
+	}
+}
+
+test.finalizedBy jacocoTestReport

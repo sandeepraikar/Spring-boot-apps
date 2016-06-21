@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GreetingController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Springwebservices-gradle</a> &gt; <a href="index.source.html" class="el_package">edu.sraikar.ws.web.api</a> &gt; <span class="el_source">GreetingController.java</span></div><h1>GreetingController.java</h1><pre class="source lang-java linenums">package edu.sraikar.ws.web.api;
+
+import java.util.Collection;
+import java.util.concurrent.Future;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import edu.sraikar.ws.model.Greeting;
+import edu.sraikar.ws.service.EmailService;
+import edu.sraikar.ws.service.GreetingService;
+
+//The @RestController extends the standard Spring sterotype
+// @Controller
+@RestController
+<span class="fc" id="L24">public class GreetingController extends BaseController{</span>
+
+	
+	@Autowired
+	GreetingService greetingService;
+
+	@Autowired
+	EmailService emailService;
+	
+	// end point for returning all the greeting objects in JSON format
+	@RequestMapping(value = &quot;/api/greetings&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity&lt;Collection&lt;Greeting&gt;&gt; getGreetings() {
+<span class="fc" id="L36">		logger.info(&quot;getAllGreetings called!&quot;);</span>
+<span class="fc" id="L37">		Collection&lt;Greeting&gt; greetings = greetingService.findAll();</span>
+<span class="fc" id="L38">		return new ResponseEntity&lt;Collection&lt;Greeting&gt;&gt;(greetings, HttpStatus.OK);</span>
+	}
+
+	// end point for retrieving a single greeting object
+	@RequestMapping(value = &quot;/api/greetings/{id}&quot;, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity&lt;Greeting&gt; getGreeting(@PathVariable(&quot;id&quot;) Long id) {
+<span class="fc" id="L44">		logger.info(&quot;getGreeting called!&quot;);</span>
+<span class="fc" id="L45">		Greeting greeting = greetingService.findOne(id);</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">		if (greeting == null) {</span>
+<span class="fc" id="L47">			return new ResponseEntity&lt;Greeting&gt;(HttpStatus.NOT_FOUND);</span>
+		}
+<span class="fc" id="L49">		return new ResponseEntity&lt;Greeting&gt;(greeting, HttpStatus.OK);</span>
+	}
+
+	// end point for creating new greeting object and saving it into dummy
+	// placeholder map object
+	@RequestMapping(value = &quot;/api/greetings&quot;, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity&lt;Greeting&gt; createGreeting(@RequestBody Greeting greeting) {
+<span class="fc" id="L56">		logger.info(&quot;createGreeting called!&quot;);</span>
+<span class="fc" id="L57">		Greeting savedGreeting = greetingService.create(greeting);</span>
+<span class="fc" id="L58">		return new ResponseEntity&lt;Greeting&gt;(savedGreeting, HttpStatus.CREATED);</span>
+	}
+
+	// end point for updating a greeting object
+	@RequestMapping(value = &quot;/api/greetings/{id}&quot;, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity&lt;Greeting&gt; updateGreeting(@RequestBody Greeting greeting) {
+<span class="fc" id="L64">		logger.info(&quot;updateGreeting called!&quot;);</span>
+<span class="fc" id="L65">		Greeting updatedGreeting = greetingService.update(greeting);</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">		if (updatedGreeting == null) {</span>
+<span class="nc" id="L67">			return new ResponseEntity&lt;Greeting&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		}
+<span class="fc" id="L69">		return new ResponseEntity&lt;Greeting&gt;(updatedGreeting, HttpStatus.OK);</span>
+	}
+
+	// end point for deleting greeting resource based on the greeting id passed
+	// as path variable!
+	@RequestMapping(value = &quot;/api/greetings/{id}&quot;, method = RequestMethod.DELETE)
+	public ResponseEntity&lt;Greeting&gt; deleteGreeting(@PathVariable(&quot;id&quot;) Long id) {
+<span class="fc" id="L76">		logger.info(&quot;deleteGreeting called!&quot;);</span>
+<span class="fc" id="L77">		greetingService.remove(id);</span>
+		/*
+		 * if(!deleted){ return new
+		 * ResponseEntity&lt;Greeting&gt;(HttpStatus.INTERNAL_SERVER_ERROR); }
+		 */
+<span class="fc" id="L82">		return new ResponseEntity&lt;Greeting&gt;(HttpStatus.NO_CONTENT);</span>
+	}
+	
+	/**
+     * Web service endpoint to fetch a single Greeting entity by primary key
+     * identifier and send it as an email.
+     * 
+     * If found, the Greeting is returned as JSON with HTTP status 200 and sent
+     * via Email.
+     * 
+     * If not found, the service returns an empty response body with HTTP status
+     * 404.
+     * 
+     * @param id A Long URL path variable containing the Greeting primary key
+     *        identifier.
+     * @param waitForAsyncResult A boolean indicating if the web service should
+     *        wait for the asynchronous email transmission.
+     * @return A ResponseEntity containing a single Greeting object, if found,
+     *         and a HTTP status code as described in the method comment.
+     */
+    @RequestMapping(
+            value = &quot;/api/greetings/{id}/send&quot;,
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity&lt;Greeting&gt; sendGreeting(@PathVariable(&quot;id&quot;) Long id,
+            @RequestParam(
+                    value = &quot;wait&quot;,
+                    defaultValue = &quot;false&quot;) boolean waitForAsyncResult) {
+
+<span class="nc" id="L111">        logger.info(&quot;&gt; sendGreeting id:{}&quot;, id);</span>
+
+<span class="nc" id="L113">        Greeting greeting = null;</span>
+
+        try {
+<span class="nc" id="L116">            greeting = greetingService.findOne(id);</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">            if (greeting == null) {</span>
+<span class="nc" id="L118">                logger.info(&quot;&lt; sendGreeting id:{}&quot;, id);</span>
+<span class="nc" id="L119">                return new ResponseEntity&lt;Greeting&gt;(HttpStatus.NOT_FOUND);</span>
+            }
+
+<span class="nc bnc" id="L122" title="All 2 branches missed.">            if (waitForAsyncResult) {</span>
+<span class="nc" id="L123">                Future&lt;Boolean&gt; asyncResponse = emailService</span>
+<span class="nc" id="L124">                        .sendAsyncWithResult(greeting);</span>
+<span class="nc" id="L125">                boolean emailSent = asyncResponse.get();</span>
+<span class="nc" id="L126">                logger.info(&quot;- greeting email sent? {}&quot;, emailSent);</span>
+<span class="nc" id="L127">            } else {</span>
+<span class="nc" id="L128">                emailService.sendAsync(greeting);</span>
+            }
+<span class="nc" id="L130">        } catch (Exception e) {</span>
+<span class="nc" id="L131">            logger.error(&quot;A problem occurred sending the Greeting.&quot;, e);</span>
+<span class="nc" id="L132">            return new ResponseEntity&lt;Greeting&gt;(</span>
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+<span class="nc" id="L134">        }</span>
+
+<span class="nc" id="L136">        logger.info(&quot;&lt; sendGreeting id:{}&quot;, id);</span>
+<span class="nc" id="L137">        return new ResponseEntity&lt;Greeting&gt;(greeting, HttpStatus.OK);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

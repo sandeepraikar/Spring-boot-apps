@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultExceptionAttributes.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Springwebservices-gradle</a> &gt; <a href="index.source.html" class="el_package">edu.sraikar.ws.web</a> &gt; <span class="el_source">DefaultExceptionAttributes.java</span></div><h1>DefaultExceptionAttributes.java</h1><pre class="source lang-java linenums">package edu.sraikar.ws.web;
+
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.http.HttpStatus;
+
+<span class="nc" id="L11">public class DefaultExceptionAttributes implements ExceptionAttributes {</span>
+
+	public static final String TIMESTAMP=&quot;timestamp&quot;;
+	public static final String STATUS=&quot;status&quot;;
+	public static final String ERROR=&quot;error&quot;;
+	public static final String EXCEPTION=&quot;exception&quot;;
+	public static final String MESSAGE=&quot;message&quot;;
+	public static final String PATH=&quot;path&quot;;
+	
+	
+	@Override
+	public Map&lt;String, Object&gt; getExceptionAttributes(Exception exception, HttpServletRequest httpRequest,
+			HttpStatus httpStatus) {
+<span class="nc" id="L24">		Map&lt;String,Object&gt; exceptionAttributes = new LinkedHashMap&lt;String, Object&gt;();</span>
+		
+<span class="nc" id="L26">		exceptionAttributes.put(TIMESTAMP,new Date());</span>
+<span class="nc" id="L27">		addHttpStatus(exceptionAttributes, httpStatus);</span>
+<span class="nc" id="L28">		addExceptionDetail(exceptionAttributes, exception);</span>
+<span class="nc" id="L29">		addPath(exceptionAttributes, httpRequest);</span>
+<span class="nc" id="L30">		return exceptionAttributes;</span>
+	}
+	
+    
+    private void addHttpStatus(Map&lt;String, Object&gt; exceptionAttributes,
+            HttpStatus httpStatus) {
+<span class="nc" id="L36">        exceptionAttributes.put(STATUS, httpStatus.value());</span>
+<span class="nc" id="L37">        exceptionAttributes.put(ERROR, httpStatus.getReasonPhrase());</span>
+<span class="nc" id="L38">    }</span>
+
+    private void addExceptionDetail(Map&lt;String, Object&gt; exceptionAttributes,
+            Exception exception) {
+<span class="nc" id="L42">        exceptionAttributes.put(EXCEPTION, exception.getClass().getName());</span>
+<span class="nc" id="L43">        exceptionAttributes.put(MESSAGE, exception.getMessage());</span>
+<span class="nc" id="L44">    }</span>
+
+    private void addPath(Map&lt;String, Object&gt; exceptionAttributes,
+            HttpServletRequest httpRequest) {
+<span class="nc" id="L48">        exceptionAttributes.put(PATH, httpRequest.getServletPath());</span>
+<span class="nc" id="L49">}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

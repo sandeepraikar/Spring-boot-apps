@@ -1,0 +1,11 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Springwebservices-gradle,edu.sraikar.ws.util,AsyncResponse,197,0,20,0,56,0,23,0,13,0
+Springwebservices-gradle,edu.sraikar.ws.service,EmailServiceBean,81,8,0,0,27,2,3,1,3,1
+Springwebservices-gradle,edu.sraikar.ws.service,GreetingServiceBean,0,102,0,4,0,27,0,9,0,7
+Springwebservices-gradle,edu.sraikar.ws.web.api,GreetingController,75,84,5,3,20,19,4,7,1,6
+Springwebservices-gradle,edu.sraikar.ws.web.api,BaseController,70,8,0,0,12,2,2,1,2,1
+Springwebservices-gradle,edu.sraikar.ws.batch,GreetingBatchBean,62,22,3,1,17,6,4,2,2,2
+Springwebservices-gradle,edu.sraikar.ws.model,Greeting,0,17,0,0,0,7,0,5,0,5
+Springwebservices-gradle,edu.sraikar,Application,5,15,0,0,2,3,1,2,1,2
+Springwebservices-gradle,edu.sraikar.ws.web,DefaultExceptionAttributes,63,0,0,0,15,0,5,0,5,0
+Springwebservices-gradle,edu.sraikar.ws.actuator.health,GreetingHealthIndicator,24,3,4,0,4,1,3,1,1,1
