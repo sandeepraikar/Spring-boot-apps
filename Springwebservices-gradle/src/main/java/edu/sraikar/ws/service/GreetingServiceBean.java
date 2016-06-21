@@ -2,6 +2,12 @@ package edu.sraikar.ws.service;
 
 import java.util.Collection;
 
+import javax.persistence.EntityExistsException;
+import javax.persistence.NoResultException;
+
+import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.cache.annotation.CacheEvict;
@@ -30,6 +36,7 @@ import edu.sraikar.ws.repository.GreetingRepository;
 
 public class GreetingServiceBean implements GreetingService {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private GreetingRepository greetingRepository;
 
@@ -57,9 +64,13 @@ public class GreetingServiceBean implements GreetingService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	@CachePut(value = "greetings", key = "#result.id")
 	public Greeting create(Greeting greeting) {
-		if (greeting.getId() != null) {
-			return null;
-		}
+		 if (greeting.getId() != null) {
+	            // Cannot create Greeting with specified ID value
+	            logger.error(
+	                    "Attempted to create a Greeting, but id attribute was not null.");
+	            throw new EntityExistsException(
+	                    "The id attribute must be null to persist a new entity.");
+	        }
 		counterService.increment("method.invoked.greetingServiceBean.create");
 		Greeting savedGreeting = greetingRepository.save(greeting);
 		// This is dummy check to see how transaction works!!!!
@@ -74,12 +85,19 @@ public class GreetingServiceBean implements GreetingService {
 	@CachePut(value="greetings",key="#greeting.id")
 	public Greeting update(Greeting greeting) {
 		counterService.increment("method.invoked.greetingServiceBean.update");
-		Greeting greetingPersisted = greetingRepository.findOne(greeting.getId());
-		if (greetingPersisted.getId() == null) {
-			return null;
-		}
-		Greeting updatedGreeting = greetingRepository.save(greeting);
-		return updatedGreeting;
+        Greeting greetingToUpdate = findOne(greeting.getId());
+        if (greetingToUpdate == null) {
+            // Cannot update Greeting that hasn't been persisted
+            logger.error(
+                    "Attempted to update a Greeting, but the entity does not exist.");
+            throw new NoResultException("Requested entity not found.");
+        }
+
+        greetingToUpdate.setText(greeting.getText());
+        Greeting updatedGreeting = greetingRepository.save(greetingToUpdate);
+
+        logger.info("< update id:{}", greeting.getId());
+        return updatedGreeting;
 	}
 
 	@Override

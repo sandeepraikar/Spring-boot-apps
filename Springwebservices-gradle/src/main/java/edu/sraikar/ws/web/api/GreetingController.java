@@ -59,7 +59,7 @@ public class GreetingController extends BaseController{
 	}
 
 	// end point for updating a greeting object
-	@RequestMapping(value = "/api/greetings", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/greetings/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Greeting> updateGreeting(@RequestBody Greeting greeting) {
 		logger.info("updateGreeting called!");
 		Greeting updatedGreeting = greetingService.update(greeting);

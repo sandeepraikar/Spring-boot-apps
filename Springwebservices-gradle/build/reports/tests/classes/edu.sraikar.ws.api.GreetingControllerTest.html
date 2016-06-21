@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class edu.sraikar.ws.api.GreetingControllerTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class edu.sraikar.ws.api.GreetingControllerTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/edu.sraikar.ws.api.html">edu.sraikar.ws.api</a> &gt; GreetingControllerTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">6</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">2.748s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">testCreateGreeting</td>
+<td>0.219s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testDeleteGreeting</td>
+<td>0.115s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetGreeting</td>
+<td>0.096s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetGreetingNotFound</td>
+<td>0.535s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGreeting</td>
+<td>1.430s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testUpdateGreeting</td>
+<td>0.353s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2016-06-20 20:05:49.220  INFO 3752 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [edu.sraikar.ws.AbstractTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2016-06-20 20:05:49.232  INFO 3752 --- [    Test worker] o.s.t.c.web.WebTestContextBootstrapper   : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-06-20 20:05:49.234  INFO 3752 --- [    Test worker] o.s.t.c.web.WebTestContextBootstrapper   : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@48c141, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@67316c, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@13f3b41, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1c4e540, org.springframework.test.context.transaction.TransactionalTestExecutionListener@1c076f0, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@f1db35]
+2016-06-20 20:05:49.445  INFO 3752 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@32033b testClass = GreetingControllerTest, testInstance = edu.sraikar.ws.api.GreetingControllerTest@c1907b, testMethod = testGetGreetingNotFound@GreetingControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@3a0619 testClass = GreetingControllerTest, locations = '{}', classes = '{class edu.sraikar.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.SpringApplicationContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@59329a]; rollback [true]
+2016-06-20 20:05:49.472  INFO 3752 --- [    Test worker] o.s.b.test.SpringBootMockServletContext  : Initializing Spring FrameworkServlet ''
+2016-06-20 20:05:49.472  INFO 3752 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization started
+2016-06-20 20:05:49.543  INFO 3752 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization completed in 71 ms
+2016-06-20 20:05:49.608  INFO 3752 --- [    Test worker] e.sraikar.ws.web.api.GreetingController  : getGreeting called!
+2016-06-20 20:05:49.972  INFO 3752 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test context [DefaultTestContext@32033b testClass = GreetingControllerTest, testInstance = edu.sraikar.ws.api.GreetingControllerTest@c1907b, testMethod = testGetGreetingNotFound@GreetingControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@3a0619 testClass = GreetingControllerTest, locations = '{}', classes = '{class edu.sraikar.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.SpringApplicationContextLoader', parent = [null]]].
+2016-06-20 20:05:49.998  INFO 3752 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@32033b testClass = GreetingControllerTest, testInstance = edu.sraikar.ws.api.GreetingControllerTest@efe46f, testMethod = testUpdateGreeting@GreetingControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@3a0619 testClass = GreetingControllerTest, locations = '{}', classes = '{class edu.sraikar.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.SpringApplicationContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@59329a]; rollback [true]
+2016-06-20 20:05:50.000  INFO 3752 --- [    Test worker] o.s.b.test.SpringBootMockServletContext  : Initializing Spring FrameworkServlet ''
+2016-06-20 20:05:50.001  INFO 3752 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization started
+2016-06-20 20:05:50.021  INFO 3752 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization completed in 20 ms
+2016-06-20 20:05:50.195  INFO 3752 --- [    Test worker] e.sraikar.ws.web.api.GreetingController  : updateGreeting called!
+2016-06-20 20:05:50.268  INFO 3752 --- [    Test worker] e.s.ws.service.GreetingServiceBean       : &lt; update id:1
+2016-06-20 20:05:50.345  INFO 3752 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test context [DefaultTestContext@32033b testClass = GreetingControllerTest, testInstance = edu.sraikar.ws.api.GreetingControllerTest@efe46f, testMethod = testUpdateGreeting@GreetingControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@3a0619 testClass = GreetingControllerTest, locations = '{}', classes = '{class edu.sraikar.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.SpringApplicationContextLoader', parent = [null]]].
+2016-06-20 20:05:50.361  INFO 3752 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@32033b testClass = GreetingControllerTest, testInstance = edu.sraikar.ws.api.GreetingControllerTest@140f21b, testMethod = testCreateGreeting@GreetingControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@3a0619 testClass = GreetingControllerTest, locations = '{}', classes = '{class edu.sraikar.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.SpringApplicationContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@59329a]; rollback [true]
+2016-06-20 20:05:50.365  INFO 3752 --- [    Test worker] o.s.b.test.SpringBootMockServletContext  : Initializing Spring FrameworkServlet ''
+2016-06-20 20:05:50.367  INFO 3752 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization started
+2016-06-20 20:05:50.408  INFO 3752 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization completed in 40 ms
+2016-06-20 20:05:50.421  INFO 3752 --- [    Test worker] e.sraikar.ws.web.api.GreetingController  : createGreeting called!
+2016-06-20 20:05:50.573  INFO 3752 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test context [DefaultTestContext@32033b testClass = GreetingControllerTest, testInstance = edu.sraikar.ws.api.GreetingControllerTest@140f21b, testMethod = testCreateGreeting@GreetingControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@3a0619 testClass = GreetingControllerTest, locations = '{}', classes = '{class edu.sraikar.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.SpringApplicationContextLoader', parent = [null]]].
+2016-06-20 20:05:50.585  INFO 3752 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@32033b testClass = GreetingControllerTest, testInstance = edu.sraikar.ws.api.GreetingControllerTest@1960d60, testMethod = testGreeting@GreetingControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@3a0619 testClass = GreetingControllerTest, locations = '{}', classes = '{class edu.sraikar.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.SpringApplicationContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@59329a]; rollback [true]
+2016-06-20 20:05:50.588  INFO 3752 --- [    Test worker] o.s.b.test.SpringBootMockServletContext  : Initializing Spring FrameworkServlet ''
+2016-06-20 20:05:50.588  INFO 3752 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization started
+2016-06-20 20:05:50.683  INFO 3752 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization completed in 95 ms
+2016-06-20 20:05:50.691  INFO 3752 --- [    Test worker] e.sraikar.ws.web.api.GreetingController  : getAllGreetings called!
+2016-06-20 20:05:52.011  INFO 3752 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test context [DefaultTestContext@32033b testClass = GreetingControllerTest, testInstance = edu.sraikar.ws.api.GreetingControllerTest@1960d60, testMethod = testGreeting@GreetingControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@3a0619 testClass = GreetingControllerTest, locations = '{}', classes = '{class edu.sraikar.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.SpringApplicationContextLoader', parent = [null]]].
+2016-06-20 20:05:52.023  INFO 3752 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@32033b testClass = GreetingControllerTest, testInstance = edu.sraikar.ws.api.GreetingControllerTest@1d4d023, testMethod = testDeleteGreeting@GreetingControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@3a0619 testClass = GreetingControllerTest, locations = '{}', classes = '{class edu.sraikar.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.SpringApplicationContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@59329a]; rollback [true]
+2016-06-20 20:05:52.027  INFO 3752 --- [    Test worker] o.s.b.test.SpringBootMockServletContext  : Initializing Spring FrameworkServlet ''
+2016-06-20 20:05:52.028  INFO 3752 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization started
+2016-06-20 20:05:52.050  INFO 3752 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization completed in 21 ms
+2016-06-20 20:05:52.077  INFO 3752 --- [    Test worker] e.sraikar.ws.web.api.GreetingController  : deleteGreeting called!
+2016-06-20 20:05:52.112  INFO 3752 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test context [DefaultTestContext@32033b testClass = GreetingControllerTest, testInstance = edu.sraikar.ws.api.GreetingControllerTest@1d4d023, testMethod = testDeleteGreeting@GreetingControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@3a0619 testClass = GreetingControllerTest, locations = '{}', classes = '{class edu.sraikar.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.SpringApplicationContextLoader', parent = [null]]].
+2016-06-20 20:05:52.145  INFO 3752 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@32033b testClass = GreetingControllerTest, testInstance = edu.sraikar.ws.api.GreetingControllerTest@9f5429, testMethod = testGetGreeting@GreetingControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@3a0619 testClass = GreetingControllerTest, locations = '{}', classes = '{class edu.sraikar.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.SpringApplicationContextLoader', parent = [null]]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@59329a]; rollback [true]
+2016-06-20 20:05:52.147  INFO 3752 --- [    Test worker] o.s.b.test.SpringBootMockServletContext  : Initializing Spring FrameworkServlet ''
+2016-06-20 20:05:52.148  INFO 3752 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization started
+2016-06-20 20:05:52.168  INFO 3752 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : FrameworkServlet '': initialization completed in 18 ms
+2016-06-20 20:05:52.220  INFO 3752 --- [    Test worker] e.sraikar.ws.web.api.GreetingController  : getGreeting called!
+2016-06-20 20:05:52.231  INFO 3752 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test context [DefaultTestContext@32033b testClass = GreetingControllerTest, testInstance = edu.sraikar.ws.api.GreetingControllerTest@9f5429, testMethod = testGetGreeting@GreetingControllerTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@3a0619 testClass = GreetingControllerTest, locations = '{}', classes = '{class edu.sraikar.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.SpringApplicationContextLoader', parent = [null]]].
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 2.14</a> at 20 Jun, 2016 8:06:04 PM</p>
+</div>
+</div>
+</body>
+</html>

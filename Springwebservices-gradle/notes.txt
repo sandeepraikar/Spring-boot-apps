@@ -12,3 +12,13 @@ localhost:8080/dump
 localhost:8080/metrics
 localhost:8080/trace
 localhost:8080/shutdown
+
+
+##
+# gradle task/goals
+##
+gradlew clean propertyReport
+gradlew clean taskReport
+gradlew clean dependencyReport
+gradlew clean htmlDependencyReport
+gradlew clean projectReport
